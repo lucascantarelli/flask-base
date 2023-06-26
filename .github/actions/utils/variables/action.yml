@@ -1,0 +1,14 @@
+name: Variables
+description: "Set variables for use in other actions"
+
+runs:
+  using: composite
+  steps:
+    - name: Set variables
+      shell: bash
+      env:
+        image_name: ${{ github.repository }}
+        image_tag: ${{ github.ref_name }}
+      run: |
+        echo "IMAGE_NAME=${image_name}" >> $GITHUB_ENV
+        echo "IMAGE_TAG=${image_tag}" >> $GITHUB_ENV
