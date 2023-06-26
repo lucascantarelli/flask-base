@@ -22,6 +22,6 @@ jobs:
 
             - name: Upload variables as artifacts
               run: |
-                echo ${{env.FBA_IMAGE_NAME}}
+                echo "$FBA_IMAGE_NAME"
             
 
