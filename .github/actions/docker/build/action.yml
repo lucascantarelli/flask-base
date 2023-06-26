@@ -1,12 +1,20 @@
 name: Build
 description: "Build a docker image"
 
+inputs:
+  name:
+    description: "The name of the docker image"
+    required: true
+  tag:
+    description: "The tag of the docker image"
+    required: true
+
 runs:
   using: composite
   steps:
     - name: Docker image build
       shell: bash
       run: |
-        echo "Building docker image ${{ github.repository }}:${{ github.ref_name }}"; \
+        echo "Building docker image ${{ inputs.name }}:${{ inputs.tag }}"; \
         docker build . \
-        --tag ${{ github.repository }}:${{ github.ref_name }}; \
+        --tag ${{ inputs.name }}:${{ inputs.tag  }}; \

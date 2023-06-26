@@ -20,7 +20,13 @@ jobs:
                 repository: ${{ github.repository }}
                 ref: ${{ github.ref_name }}
                 fetch-depth: 0
+            
+            - name: Setting variables
+              uses: ./.github/actions/utils/variables
 
             - name: Build docker image
               id: build
               uses: ./.github/actions/docker/build
+              with:
+                name: $IMAGE_NAME
+                tag: $IMAGE_TAG
