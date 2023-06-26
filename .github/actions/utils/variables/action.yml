@@ -14,4 +14,4 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo "$GITHUB_ENV" | grep "FBA"
+        echo $("$GITHUB_ENV" | grep "FBA")
