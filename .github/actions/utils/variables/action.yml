@@ -13,4 +13,4 @@ runs:
         echo "FBA_IMAGE_TAG=${FBA_IMAGE_TAG}" >> $GITHUB_ENV; \
         echo $FBA_IMAGE_NAME; \
         echo $FBA_IMAGE_TAG; \
-        cat variables; \
+        cat variables.env; \
