@@ -9,8 +9,4 @@ runs:
       run: |
         FBA_IMAGE_NAME=${{ github.repository }} >> variables.env; \
         FBA_IMAGE_TAG=$(git describe --tags --abbrev=0) >> variables.env; \
-        echo "FBA_IMAGE_NAME=${FBA_IMAGE_NAME}" >> $GITHUB_ENV; \
-        echo "FBA_IMAGE_TAG=${FBA_IMAGE_TAG}" >> $GITHUB_ENV; \
-        echo $FBA_IMAGE_NAME; \
-        echo $FBA_IMAGE_TAG; \
         cat variables.env; \
