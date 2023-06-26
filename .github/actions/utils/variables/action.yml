@@ -11,4 +11,4 @@ runs:
         image_tag: ${{ github.ref_name }}
       run: |
         echo "IMAGE_NAME=${image_name}" >> $GITHUB_ENV
-        echo "IMAGE_TAG=${image_tag}" >> $GITHUB_ENV
+        echo "IMAGE_TAG='echo $(git describe --abbrev=0 --tags)'" >> $GITHUB_ENV
