@@ -20,6 +20,7 @@ jobs:
               uses: ./.github/actions/utils/variables
 
             - name: Upload variables as artifacts
-              run: echo "Upload"
+              run: |
+                echo ${{env.FBA_IMAGE_NAME}}
             
 
