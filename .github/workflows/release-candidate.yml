@@ -1,6 +1,7 @@
 name: Release Candidate
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
