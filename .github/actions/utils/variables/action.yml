@@ -6,6 +6,9 @@ runs:
   steps:
     - name: Set variables
       shell: bash
+      env:
+        IMAGE_NAME: ${{ github.repository}}
+        IMAGE_TAG: $(git describe --tags --abbrev=0)
       run: |
-        echo "IMAGE_NAME=${image_name}" >> $GITHUB_ENV
-        echo "IMAGE_TAG='echo $(git describe --abbrev=0 --tags)'" >> $GITHUB_ENV
+        echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+        echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
