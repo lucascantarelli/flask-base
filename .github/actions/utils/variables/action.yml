@@ -9,4 +9,4 @@ runs:
       run: |
         FBA_IMAGE_NAME=${{ github.repository }} >> variables; \
         FBA_IMAGE_TAG=$(git describe --tags --abbrev=0) >> variables; \
-        echo toJSON(variables); \
+        cat variables; \
