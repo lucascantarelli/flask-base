@@ -10,6 +10,7 @@ runs:
         IMAGE_NAME: ""
         IMAGE_TAG: ""
       run: |
-        echo ::set-env name=IMAGE_NAME::${{ github.repository }}
-        echo ::set-env name=IMAGE_TAG::$(git describe --tags --abbrev=0)
-        echo env >> $GITHUB_ENV
+        echo ::set-env name=IMAGE_NAME::${{ github.repository }}; \
+        echo ::set-env name=IMAGE_TAG::$(git describe --tags --abbrev=0) ; \
+        echo ${{ toJSON(env) }} >> $GITHUB_ENV ; \
+        echo ${{ toJSON(steps) }} ; \
