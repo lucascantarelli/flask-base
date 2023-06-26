@@ -7,11 +7,11 @@ runs:
     - name: Set variables
       shell: bash
       run: |
-        FBA_IMAGE_NAME=${{ github.repository }} >> $GITHUB_ENV; \
-        FBA_IMAGE_TAG=$(git describe --tags --abbrev=0) >> $GITHUB_ENV; \
+        echo "FBA_IMAGE_NAME=${{ github.repository }}" >> "$GITHUB_ENV"
+        echo "FBA_IMAGE_TAG=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"
 
     - name: Set outputs
       id: vars
       shell: bash
       run: |
-        echo $GITHUB_ENV | grep "FBA"
+        echo "$GITHUB_ENV" | grep "FBA"
