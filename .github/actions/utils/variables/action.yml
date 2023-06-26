@@ -9,4 +9,9 @@ runs:
       run: |
         FBA_IMAGE_NAME=${{ github.repository }} >> variables.env; \
         FBA_IMAGE_TAG=$(git describe --tags --abbrev=0) >> variables.env; \
-        cat variables.env; \
+
+    - name: Set outputs
+      id: vars
+      shell: bash
+      run: |
+        echo $(cat variables.env)
