@@ -4,14 +4,6 @@ on:
   push:
   workflow_dispatch:
 
-env:
-  colors:
-    RED='\033[0;31m'    
-    GREEN='\033[0;32m'    
-    YELLOW='\033[1;33m' 
-    WHITE='\033[1;37m'
-    SET='\033[0m'
-
 jobs:
     envoirenment:
         name: Envoirenment
@@ -27,9 +19,8 @@ jobs:
             
             - name: Setting variables
               uses: ./.github/actions/utils/variables
-              with:
-                colors: ${{ env.colors }}
 
             - name: Upload variables as artifacts
               run: |
-                echo ${{ env.colors.red }}$FBA_IMAGE_NAME${{ env.colors.SET }}        
+                echo $FBA_IMAGE_NAME
+                echo $FBA_IMAGE_TAG    

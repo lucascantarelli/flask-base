@@ -1,22 +1,12 @@
 name: Variables
 description: "Set variables for use in other actions"
 
-inputs:
-  colors:
-    description: "Colors to use"
-    required: true
-    default: "red,green,blue"
-
 runs:
   using: composite
   steps:
     - name: Set variables
       shell: bash
       run: |
-        echo "## Variables :rocket:" >> $GITHUB_STEP_SUMMARY
-        echo "### setting variables for use in other actions." >> $GITHUB_STEP_SUMMARY
-        echo ${{ inputs.colors }}
-
-
+        echo "Setting variables..."
         echo "FBA_IMAGE_NAME=${{ github.repository }}" >> "$GITHUB_ENV"
         echo "FBA_IMAGE_TAG=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"
