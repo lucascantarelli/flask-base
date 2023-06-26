@@ -32,4 +32,4 @@ jobs:
 
             - name: Upload variables as artifacts
               run: |
-                echo $FBA_IMAGE_NAME           
+                echo ${{ env.colors.red }}$FBA_IMAGE_NAME${{ env.colors.SET }}        
