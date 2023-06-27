@@ -36,5 +36,4 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables"; \
-            ls -la; \
-            echo $(cat variables/variables.txt); \
+            cat variables.txt; \
