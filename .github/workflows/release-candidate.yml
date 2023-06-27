@@ -31,8 +31,7 @@ jobs:
         - name: Download Artifact
           uses: actions/download-artifact@v3
           with:
-            name: variables
-            path: variables
+            name: variables.tar.gz
 
         - name: Setting variables
           run: |
