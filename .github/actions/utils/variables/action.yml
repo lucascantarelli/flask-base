@@ -10,3 +10,16 @@ runs:
         echo "Setting variables..."
         echo "FBA_IMAGE_NAME=${{ github.repository }}" >> "$GITHUB_ENV"
         echo "FBA_IMAGE_TAG=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"
+
+    - name: Create variables file
+      shell: bash
+      run: |
+        echo "Creating variables file..."
+        touch variables
+        echo "$GITHUB_ENV" >> variables
+
+    - name: Upload variables file
+      uses: actions/upload-artifact@v3
+      with:
+        name: variables
+        path: .

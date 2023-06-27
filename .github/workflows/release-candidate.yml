@@ -20,15 +20,12 @@ jobs:
             - name: Setting variables
               uses: ./.github/actions/utils/variables
 
-            - name: Upload variables as artifacts
-              run: |
-                touch variables && chmod 777 variables;
-                echo $GITHUB_ENV >> variables;
+            - name: Download Artifact
+              uses: actions/download-artifact@v3
+              with:
+                name: variables
+                path: variables
 
-            - name: Upload variables as artifacts
+            - name: Setting variables
               run: |
-                echo "${{env.IMAGE_TAG}}"
-                echo "$IMAGE_TAG"
-                cat variables;
-                ls -la;
-                cat .gitignore;
+                $GITHUB_ENV < variables
