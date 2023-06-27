@@ -27,4 +27,4 @@ jobs:
 
             - name: Upload variables as artifacts
               run: |
-                echo $(cat variables);
+                cat variables;
