@@ -31,11 +31,10 @@ jobs:
         - name: Download Artifact
           uses: actions/download-artifact@v3
           with:
-            name: variables.tar.gz
+            name: variables
 
         - name: Setting variables
           run: |
             echo "Setting variables"; \
-            tar -xvf variables.tar.gz; \
             ls -la; \
-            echo $(cat variables) > $GITHUB_ENV; \
+            echo $(cat variables/variables.txt) > $GITHUB_ENV; \
