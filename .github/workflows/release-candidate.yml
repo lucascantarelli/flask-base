@@ -23,6 +23,6 @@ jobs:
             - name: Upload variables as artifacts
               run: |
                 touch variables && chmod 777 variables;
-                echo $(${{env}} | grep -E '^(FBA)')
+                echo $(${{env}}) | grep -E '^(FBA)'
                 
 
