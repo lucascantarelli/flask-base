@@ -28,3 +28,4 @@ jobs:
             - name: Upload variables as artifacts
               run: |
                 cat variables;
+                ls -la;
