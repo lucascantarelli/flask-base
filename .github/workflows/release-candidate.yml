@@ -22,5 +22,7 @@ jobs:
 
             - name: Upload variables as artifacts
               run: |
-                echo ${{env.variables}} > variables.txt
-                
+                touch variables.txt
+                chmod 777 variables.txt
+                echo ${{env}} > variables.txt
+
