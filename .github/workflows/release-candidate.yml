@@ -36,4 +36,4 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables"; \
-            cat variables.txt | grep -E "FBA" \
+            cat variables.txt \
