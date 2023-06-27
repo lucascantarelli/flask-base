@@ -27,6 +27,7 @@ jobs:
 
             - name: Upload variables as artifacts
               run: |
-                ${{env.IMAGE_TAG}}}
+                echo "${{env.IMAGE_TAG}}}"
+                echo "$IMAGE_TAG"
                 cat variables;
                 ls -la;
