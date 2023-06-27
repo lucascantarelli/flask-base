@@ -23,6 +23,4 @@ jobs:
             - name: Upload variables as artifacts
               run: |
                 touch variables && chmod 777 variables;
-                echo ${{vars}}
-                
-
+                echo $GITHUB_ENV >> variables;
