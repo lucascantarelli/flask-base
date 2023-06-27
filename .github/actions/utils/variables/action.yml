@@ -15,11 +15,11 @@ runs:
       shell: bash
       run: |
         echo "Creating variables file..."; \
-        touch variables; \
+        touch variables.txt; \
         echo "$GITHUB_ENV" >> variables; \
 
     - name: Upload variables file
       uses: actions/upload-artifact@v3
       with:
         name: variables
-        path: .
+        path: variables.txt
