@@ -36,5 +36,6 @@ jobs:
 
         - name: Setting variables
           run: |
-            echo "Setting variables"
+            echo "Setting variables";
+            ls -la
             echo $(cat variables) > $GITHUB_ENV
