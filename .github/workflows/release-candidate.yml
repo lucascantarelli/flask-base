@@ -20,7 +20,7 @@ jobs:
             - name: Setting variables
               uses: ./.github/actions/utils/variables
 
-    build:
+    test:
       name: Build
       timeout-minutes: 10
       runs-on: ubuntu-latest
@@ -36,4 +36,14 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables"; \
-            cat variables.txt \
+            cat variables.txt >> $GITHUB_ENV
+        
+        - uses: actions/checkout@v3
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
+        - name: Testing build
+          run: |
+            docker build -t $FBA_IMAGE_NAME:$FBA_IMAGE_TAG .
