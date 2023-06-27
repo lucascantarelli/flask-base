@@ -4,19 +4,18 @@ description: "Set variables for use in other actions"
 runs:
   using: composite
   steps:
-    - name: Set variables
-      shell: bash
-      run: |
-        echo "Setting variables..."; \
-        echo "FBA_IMAGE_NAME=${{ github.repository }}" >> "$GITHUB_ENV"; \
-        echo "FBA_IMAGE_TAG=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"; \
-
     - name: Create variables file
       shell: bash
       run: |
         echo "Creating variables file..."; \
         touch variables.txt; \
-        echo "$GITHUB_ENV" >> variables; \
+
+    - name: Set variables
+      shell: bash
+      run: |
+        echo "Setting variables..."; \
+        echo "FBA_IMAGE_NAME=${{ github.repository }}" >> variables.txt \
+        echo "FBA_IMAGE_TAG=$(git describe --tags --abbrev=0)" >> variables.txt \
 
     - name: Upload variables file
       uses: actions/upload-artifact@v3
