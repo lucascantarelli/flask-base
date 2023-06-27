@@ -23,6 +23,6 @@ jobs:
             - name: Upload variables as artifacts
               run: |
                 touch variables.json
-                chmod 777 variables.txt
+                chmod 777 variables.json
                 echo ${{toJSON(env)}} > variables.json
 
