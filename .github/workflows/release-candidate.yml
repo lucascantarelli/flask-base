@@ -37,5 +37,6 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables"; \
-            ls -R; \
+            tar -xvf variables.tar.gz; \
+            ls -la; \
             echo $(cat variables) > $GITHUB_ENV; \

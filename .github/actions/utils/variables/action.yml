@@ -21,5 +21,5 @@ runs:
     - name: Upload variables file
       uses: actions/upload-artifact@v3
       with:
-        name: variables
+        name: variables.tar.gz
         path: variables.txt
