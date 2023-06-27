@@ -20,12 +20,19 @@ jobs:
             - name: Setting variables
               uses: ./.github/actions/utils/variables
 
-            - name: Download Artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: variables
-                path: variables
+    build:
+      name: Build
+      timeout-minutes: 10
+      runs-on: ubuntu-latest
 
-            - name: Setting variables
-              run: |
-                $GITHUB_ENV < variables
+      steps:
+        - name: Download Artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: variables
+            path: variables
+
+        - name: Setting variables
+          run: |
+            echo "Setting variables"
+            echo $(cat variables) > $GITHUB_ENV
