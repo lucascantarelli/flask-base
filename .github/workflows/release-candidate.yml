@@ -12,5 +12,8 @@ jobs:
 
         steps:
             - name: Setting variables
-              uses: dolorestec/devops/.github/workflows/envoirenment.yml@main
+              uses: dolorestec/devops/.github/workflows/envoirenment.yml@v1
+              with:
+                  image_name: ${{ github.repository }}
+                  image_tag: ${{ github.ref_name }}
 
