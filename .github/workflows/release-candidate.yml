@@ -10,8 +10,8 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Setting variables
-              uses: dolorestec/devops/.github/workflows/envoirenment.yml@v1
+            - uses: dolorestec/devops/.github/workflows/envoirenment.yml@v1
+              name: Setting variables
               with:
                   image_name: ${{ github.repository }}
                   image_tag: ${{ github.ref_name }}
