@@ -5,16 +5,10 @@ on:
 
 jobs:
     envoirenment:
-        name: Envoirenment
-        timeout-minutes: 10
-        runs-on: ubuntu-latest
+          name: Envoirenment
+          uses: dolorestec/devops/.github/workflows/envoirenment.yml@v1 
+          with:
+              image_name: ${{ github.repository }}
+              image_tag: ${{ github.ref_name }}
+          
 
-        steps:
-            - uses: dolorestec/devops/.github/workflows/envoirenment.yml@v1
-              name: Setting variables
-              with:
-                  image_name: ${{ github.repository }}
-                  image_tag: ${{ github.ref_name }}
-
-            - name: Building image
-              run: echo "Building image"
