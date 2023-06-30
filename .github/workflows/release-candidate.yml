@@ -16,3 +16,31 @@ jobs:
                   image_name: ${{ github.repository }}
                   image_tag: ${{ github.ref_name }}
 
+        
+    manual-start:
+        name: Manual Start
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        needs: envoirenment
+        outputs:
+          CONTINUE_JOBS: ${{ steps.manual.outputs.CONTINUE_JOBS }}
+
+        steps:
+            - name: Manual Start
+              id: manual
+              uses: benhamiltonpro/manual-trigger@v1
+              with:
+                RUN_NAME: "release-candidate"
+
+    release-candidate:
+        name: Release Candidate
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        needs: manual-start
+        if: ${{ needs.manual-start.outputs.CONTINUE_JOBS == 'true' }}
+
+        steps:
+            - name: Checkout
+              run: echo "Checkout"
+
+
