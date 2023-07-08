@@ -1,11 +1,10 @@
-name: Release Candidate
+name: Release Branch
 
 on:
   workflow_dispatch:
 
 jobs:
-    envoirenment:
-      name: Envoirenment
+    release-branch:
       uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
           
 
