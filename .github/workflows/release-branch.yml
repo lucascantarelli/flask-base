@@ -23,7 +23,7 @@ jobs:
         - name: Creating variables
           run: |
             echo "Creating variables file"
-            touch variables && chmod 777 variables.json
+            touch variables && chmod 777 variables
 
         - name: Setting variables
           env:
