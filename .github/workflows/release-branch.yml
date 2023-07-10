@@ -35,6 +35,7 @@ jobs:
             echo ${{env.DLRS_NAME}} >> variables
             echo ${{env.DLRS_BRANCH}} >> variables
             echo ${{env.DLRS_VERSION}} >> variables
+            cat variables
 
 
         - name: Upload variables
