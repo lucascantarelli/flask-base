@@ -1,6 +1,10 @@
 name: Release Branch
 
 on:
+  pull_request:
+    branches:
+      - develop
+
   workflow_dispatch:
 
 jobs:
@@ -30,8 +34,3 @@ jobs:
         - name: Cat variables
           run: |
             cat variables
-          
-
-
-          
-
