@@ -5,13 +5,11 @@ on:
     branches:
       - develop
 
-  workflow_dispatch:
-
 jobs:
     release-branch:
       #uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
       name: Variables
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -31,23 +29,14 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)       
           run: |
+            echo "Setting variables in variables file"
             echo ${{env.DLRS_NAME}} >> variables
             echo ${{env.DLRS_BRANCH}} >> variables
             echo ${{env.DLRS_VERSION}} >> variables
 
 
         - name: Upload variables
-          run: |
-            cat variables
-
-    finish:
-        name: Finish
-        needs: release-branch
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: Print variables
-            run: |
-              echo $DLRS_NAME
-              echo $DLRS_BRANCH
-              echo $DLRS_VERSION
+          uses: actions/upload-artifact@v2
+          with:
+            name: variables
+            path: variables
