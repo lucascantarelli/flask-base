@@ -5,6 +5,33 @@ on:
 
 jobs:
     release-branch:
-      uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
+      #uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
+      name: Variables
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
+        - name: Setting variables
+          run: |
+            echo "Setting variables"
+            echo "" > variables
+
+        - name: Export variables
+          run: |
+            echo -e $(export DLRS_NAME=$(echo ${{ github.repository }})) >> variables
+            echo -e $(export DLRS_BRANCH=$(echo ${{ github.ref_name }})) >> variables
+            echo -e $(export DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)) >> variables
+
+        - name: Cat variables
+          run: |
+            cat variables
+          
+
+
           
 
