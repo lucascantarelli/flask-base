@@ -22,15 +22,16 @@ jobs:
 
         - name: Setting variables
           run: |
-            echo "Setting variables"
-            echo "" > variables
+            echo -e $(export DLRS_NAME=$(echo ${{ github.repository }})) >> $GITHUB_ENV
+            echo -e $(export DLRS_BRANCH=$(echo ${{ github.ref_name }})) >> $GITHUB_ENV
+            echo -e $(export DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)) >> $GITHUB_ENV
 
-        - name: Export variables
+        - name: Print variables
           run: |
-            echo -e $(export DLRS_NAME=$(echo ${{ github.repository }})) >> variables
-            echo -e $(export DLRS_BRANCH=$(echo ${{ github.ref_name }})) >> variables
-            echo -e $(export DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)) >> variables
+            echo $DLRS_NAME
+            echo $DLRS_BRANCH
+            echo $DLRS_VERSION
 
-        - name: Cat variables
+        - name: Print Env
           run: |
-            cat variables
+            env | grep DLRS
