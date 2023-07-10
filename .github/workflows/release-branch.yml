@@ -65,8 +65,10 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            echo $(cat variables) >> $GITHUB_ENV
-
+            ls -la
+            tar -xvf variables
+            cat variables
+            
         - name: Docker build
           run: |
             echo "Building docker image"
