@@ -1,7 +1,7 @@
 name: Release Branch
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
 
@@ -28,10 +28,10 @@ jobs:
 
         - name: Print variables
           run: |
-            echo $DLRS_NAME
-            echo $DLRS_BRANCH
+            echo "$DLRS_NAME"
+            echo ${DLRS_BRANCH}
             echo $DLRS_VERSION
 
         - name: Print Env
           run: |
-            env | grep DLRS
+            echo $GITHUB_ENV | grep DLRS
