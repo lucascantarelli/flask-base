@@ -19,6 +19,7 @@ jobs:
             repository: ${{ github.repository }}
             ref: ${{ github.ref_name }}
             fetch-depth: 0
+            tags: true
 
         - name: Creating variables
           run: |
@@ -26,16 +27,11 @@ jobs:
             touch variables && chmod 777 variables
 
         - name: Setting variables
-          env:
-            DLRS_NAME: ${{ github.repository }}
-            DLRS_BRANCH: ${{ github.ref_name }}
-            DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)       
           run: |
             echo "Setting variables in variables file"
-            echo ${{env.DLRS_NAME}} >> variables
-            echo ${{env.DLRS_BRANCH}} >> variables
-            echo ${{env.DLRS_VERSION}} >> variables
-            cat variables
+            echo -e $(echo "DLRS_NAME=${{ github.repository }}") >> variables
+            echo -e $(echo "DLRS_BRANCH=${{ github.ref_name }}") >> variables
+            echo -e $(echo "DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)") >> variables
 
 
         - name: Upload variables
