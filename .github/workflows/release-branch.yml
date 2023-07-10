@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - develop
+
   workflow_dispatch:
 
 jobs:
-    release-branch:
+    variables:
       #uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
       name: Variables
       runs-on: self-hosted
@@ -28,7 +29,7 @@ jobs:
           env:
             DLRS_NAME: ${{ github.repository }}
             DLRS_BRANCH: ${{ github.ref_name }}
-            DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)       
+            DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" "v*-RC*" --merged)       
           run: |
             echo "Setting variables in variables file"
             echo ${{env.DLRS_NAME}} >> variables
@@ -41,3 +42,59 @@ jobs:
           with:
             name: variables
             path: variables
+
+    
+    docker:
+      name: Docker
+      runs-on: self-hosted
+      needs: variables
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
+        - name: Download variables
+          uses: actions/download-artifact@v2
+          with:
+            name: variables
+            path: variables
+
+        - name: Setting variables
+          run: |
+            echo "Setting variables from variables file"
+            echo $(cat variables) >> $GITHUB_ENV
+
+        - name: Docker build
+          run: |
+            echo "Building docker image"
+            docker build -t $DLRS_NAME:$DLRS_VERSION .  
+
+        - name: Docker login
+          run: |
+            echo "Logging into docker"
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        
+        - name: Docker push
+          run: |
+            echo "Pushing docker image"
+            docker push $DLRS_NAME:$DLRS_VERSION
+
+        - name: Docker logout
+          run: |
+            echo "Logging out of docker"
+            docker logout
+
+    release_branch:
+      
+        name: Release Branch
+        runs-on: self-hosted
+        needs: docker
+        steps:
+          - name: Checkout
+            run:
+              echo "Checking out"
+              git checkout $DLRS_BRANCH
+    
