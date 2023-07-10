@@ -65,8 +65,6 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            ls -la
-            tar -xvf variables
             cat variables
 
         - name: Docker build
