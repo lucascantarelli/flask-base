@@ -26,7 +26,7 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
           run: |
-            echo ${{ toJson(secrets) }} >> $GITHUB_ENV
+            echo ${{ toJson(env) }} >> $GITHUB_ENV
 
         - name: Release Branch
           run: |
