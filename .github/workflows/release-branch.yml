@@ -26,6 +26,4 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
           run: |
-            for i in ${{ env }}; do
-              echo "Version: $i"
-            done
+            echo ${{ toJson(env) }}
