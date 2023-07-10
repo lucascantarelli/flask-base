@@ -22,12 +22,8 @@ jobs:
 
         - name: Creating variables
           run: |
-            touch variables.json
-            chmod 777 variables.json
-
-        - name: LS arquivo
-          run: |
-            ls -la
+            echo "Creating variables file"
+            touch variables.json && chmod 777 variables.json
 
         - name: Setting variables
           env:
@@ -35,9 +31,9 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)       
           run: |
-            echo ${{env.DLRS_NAME}}
-            echo ${{env.DLRS_BRANCH}}
-            echo ${{env.DLRS_VERSION}}
+            echo ${{env.DLRS_NAME}} >> variables.json
+            echo ${{env.DLRS_BRANCH}} >> variables.json
+            echo ${{env.DLRS_VERSION}} >> variables.json
 
 
         - name: Upload variables
