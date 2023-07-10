@@ -26,7 +26,7 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)       
           run: |
-            export DLRS_VARIABLES=${{ toJson(env) }}
+            echo "foi"
 
         - name: For nas variaveis
           run: |
