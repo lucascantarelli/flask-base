@@ -26,6 +26,18 @@ jobs:
             DLRS_BRANCH: ${{ github.ref_name }}
             DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
           run: |
-            for i in ${{ toJson(env) }}; do
-              echo $i
-            done
+            echo ${{ toJson(env) }} >> $GITHUB_ENV
+
+        - name: Print variables
+          run: |
+            echo $DLRS_NAME
+            echo $DLRS_BRANCH
+            echo $DLRS_VERSION
+
+        - name: To file
+          run: |
+            echo ${{ toJson(env) }} >> variables.json
+
+        - name: Upload variables
+          run: |
+            cat variables.json
