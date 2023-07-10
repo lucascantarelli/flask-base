@@ -21,17 +21,11 @@ jobs:
             fetch-depth: 0
 
         - name: Setting variables
+          env:
+            DLRS_NAME: ${{ github.repository }}
+            DLRS_BRANCH: ${{ github.ref_name }}
+            DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged))
           run: |
-            echo -e $(export DLRS_NAME=$(echo ${{ github.repository }})) >> $GITHUB_ENV
-            echo -e $(export DLRS_BRANCH=$(echo ${{ github.ref_name }})) >> $GITHUB_ENV
-            echo -e $(export DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)) >> $GITHUB_ENV
-
-        - name: Print variables
-          run: |
-            echo "$DLRS_NAME"
-            echo ${DLRS_BRANCH}
-            echo $DLRS_VERSION
-
-        - name: Print Env
-          run: |
-            echo $GITHUB_ENV | grep DLRS
+            echo ${{env.DLRS_NAME}}
+            echo ${{env.DLRS_BRANCH}}
+            echo ${{env.DLRS_VERSION}}
