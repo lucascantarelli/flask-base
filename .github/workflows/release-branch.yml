@@ -30,9 +30,7 @@ jobs:
 
         - name: For nas variaveis
           run: |
-            for var in $DLRS_VARIABLES; do
-              echo $var
-            done
+            echo $DLRS_VARIABLES
 
         - name: Print variables
           run: |
