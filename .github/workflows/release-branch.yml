@@ -41,7 +41,7 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: variables
-            path: variables
+            path: .
 
     
     docker:
@@ -60,7 +60,7 @@ jobs:
           uses: actions/download-artifact@v2
           with:
             name: variables
-            path: variables
+            path: .
 
         - name: Setting variables
           run: |
@@ -68,7 +68,7 @@ jobs:
             ls -la
             tar -xvf variables
             cat variables
-            
+
         - name: Docker build
           run: |
             echo "Building docker image"
