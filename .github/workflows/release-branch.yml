@@ -25,11 +25,9 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables in variables file"
-            EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
             echo -e DLRS_NAME=${{ github.repository }} >> "$GITHUB_ENV"
             echo -e DLRS_BRANCH=${{ github.ref_name }} >> "$GITHUB_ENV"
             echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> "$GITHUB_ENV"
-            echo "$EOF" >> "$GITHUB_ENV
 
         - name: Upload variables
           run: |
