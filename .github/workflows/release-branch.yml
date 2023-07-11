@@ -23,10 +23,6 @@ jobs:
         - name: Creating variables
           run: touch variables
 
-        - name:
-          run: |
-            echo $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
-
         - name: Setting variables
           env:
             DLRS_NAME: ${{ github.repository }}
