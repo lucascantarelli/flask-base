@@ -63,7 +63,7 @@ jobs:
 
         - name: Docker build
           run: |
-            echo "Building docker image"
+            echo "Building docker image $DLRS_NAME:$DLRS_VERSION"
             docker build . --tag $DLRS_NAME:$DLRS_VERSION
 
         - name: Docker login
