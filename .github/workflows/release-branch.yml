@@ -25,14 +25,15 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables in variables file"
-            echo -e DLRS_NAME=${{ github.repository }} >> variables
-            echo -e DLRS_BRANCH=${{ github.ref_name }} >> variables
-            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> variables
+            touch variables.txt
+            echo -e DLRS_NAME=${{ github.repository }} >> variables.txt
+            echo -e DLRS_BRANCH=${{ github.ref_name }} >> variables.txt
+            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> variables.txt
 
         - name: Upload variables
           uses: actions/upload-artifact@v2
           with:
-            name: variables.txt
+            name: variables
             path: variables.txt
   
     docker:
@@ -50,7 +51,7 @@ jobs:
         - name: Download variables
           uses: actions/download-artifact@v2
           with:
-            name: variables.txt
+            name: variables
 
         - name: Setting variables
           run: |
