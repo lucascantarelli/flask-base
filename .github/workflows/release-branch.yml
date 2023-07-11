@@ -28,11 +28,21 @@ jobs:
             echo $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
 
         - name: Setting variables
+          env:
+            DLRS_NAME: ${{ github.repository }}
+            DLRS_BRANCH: ${{ github.ref_name }}
+            DLRS_VERSION: $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
           run: |
             echo "Setting variables in variables file"
-            echo -e $(echo "DLRS_NAME=${{ github.repository }}") >> variables
-            echo -e $(echo "DLRS_BRANCH=${{ github.ref_name }}") >> variables
-            echo -e $(echo "DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged)") >> variables
+            echo ${{ env.DLRS_NAME }}") >> variables
+            echo ${{ env.DLRS_BRANCH }}") >> variables
+            echo ${{ env.DLRS_VERSION }}") >> variables
+
+        - 
+          name: Cat variables
+          run: |
+            echo "Variables file"
+            cat variables
 
 
         - name: Upload variables
