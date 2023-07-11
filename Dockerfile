@@ -14,11 +14,9 @@ WORKDIR /app
 EXPOSE 5000
 
 # Create virtualenv
-RUN python -m venv $POETRY_VIRTUALENV_PATH
-RUN echo 'source $POETRY_VIRTUALENV_PATH/bin/activate' >> ~/.bashrc
-
-# Install Poetry
-RUN $POETRY_VIRTUALENV_PATH/bin/pip install --upgrade pip poetry
+RUN python -m venv $POETRY_VIRTUALENV_PATH \
+	&& echo 'source $POETRY_VIRTUALENV_PATH/bin/activate' >> ~/.bashrc \
+	&& $POETRY_VIRTUALENV_PATH/bin/pip install --upgrade pip poetry
 
 # Register Poetry in PATH
 ENV PATH="${POETRY_VIRTUALENV_PATH}/bin:${PATH}"
@@ -33,9 +31,7 @@ Poetry Cache: ${POETRY_CACHE_DIR}\n\
 Poetry Version: $(poetry --version)\n\
 Python Version: $(python --version)\n\
 ===================================================================\n\
-" > /etc/motd;
+" > /etc/motd && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc;
 
-RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc;
-
-# RRUN Bash
+USER daemon
 CMD ["/bin/bash"]
