@@ -33,7 +33,7 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: variables.txt
-            path: ./variables.txt
+            path: variables.txt
   
     docker:
       name: Docker
