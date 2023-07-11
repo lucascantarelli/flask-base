@@ -32,8 +32,8 @@ jobs:
         - name: Upload variables
           uses: actions/upload-artifact@v2
           with:
-            name: variables
-            path: .
+            name: variables.txt
+            path: ./variables.txt
   
     docker:
       name: Docker
@@ -50,8 +50,7 @@ jobs:
         - name: Download variables
           uses: actions/download-artifact@v2
           with:
-            name: variables
-            path: .
+            name: variables.txt
 
         - name: Setting variables
           run: |
