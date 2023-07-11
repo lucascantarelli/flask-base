@@ -28,10 +28,6 @@ jobs:
             echo -e DLRS_NAME=${{ github.repository }} >> "$GITHUB_ENV"
             echo -e DLRS_BRANCH=${{ github.ref_name }} >> "$GITHUB_ENV"
             echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> "$GITHUB_ENV"
-
-        - name: Upload variables
-          run: |
-            echo ${{env.DLRS_NAME}}
   
     docker:
       name: Docker
@@ -45,15 +41,9 @@ jobs:
             ref: ${{ github.ref_name }}
             fetch-depth: 0
 
-        - name: Download variables
-          uses: actions/download-artifact@v2
-          with:
-            name: variables
-
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            source variables.txt
             echo $DLRS_NAME
             echo $DLRS_BRANCH
             echo $DLRS_VERSION
