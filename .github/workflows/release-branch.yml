@@ -56,13 +56,16 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            cat variables.txt
             variables=$(cat variables.txt)
-            echo $variables
-            export $variables
+            for variable in $variables; do
+              echo $variable >> $GITHUB_ENV
+            done
             echo "DLRS_NAME=${{ env.DLRS_NAME }}"
             echo "DLRS_BRANCH=${{ env.DLRS_BRANCH }}"
             echo "DLRS_VERSION=${{ env.DLRS_VERSION }}"
+            echo $DLRS_NAME
+            echo $DLRS_BRANCH
+            echo $DLRS_VERSION
 
         - name: Docker build
           run: |
