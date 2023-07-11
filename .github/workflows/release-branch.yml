@@ -56,7 +56,8 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            echo $(cat variables) >> "$GITHUB_ENV"
+            tar -xvf variables
+            echo $(cat variables/variables.txt) >> "$GITHUB_ENV"
             echo "DLRS_NAME=${{ env.DLRS_NAME }}"
             echo "DLRS_BRANCH=${{ env.DLRS_BRANCH }}"
             echo "DLRS_VERSION=${{ env.DLRS_VERSION }}"
