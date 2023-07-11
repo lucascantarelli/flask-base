@@ -33,7 +33,7 @@ jobs:
         - name: Upload variables
           uses: actions/upload-artifact@v2
           with:
-            name: variables
+            name: variables.txt
             path: variables.txt
   
     docker:
@@ -51,12 +51,12 @@ jobs:
         - name: Download variables
           uses: actions/download-artifact@v2
           with:
-            name: variables
+            name: variables.txt
 
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            tar -xvf variables
+            ls -la
             echo $(cat variables/variables.txt) >> "$GITHUB_ENV"
             echo "DLRS_NAME=${{ env.DLRS_NAME }}"
             echo "DLRS_BRANCH=${{ env.DLRS_BRANCH }}"
