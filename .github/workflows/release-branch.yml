@@ -25,9 +25,16 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables in variables file"
-            echo -e DLRS_NAME=${{ github.repository }} >> "$GITHUB_ENV"
-            echo -e DLRS_BRANCH=${{ github.ref_name }} >> "$GITHUB_ENV"
-            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> "$GITHUB_ENV"
+            touch variables.txt
+            echo -e DLRS_NAME=${{ github.repository }} >> variables.txt
+            echo -e DLRS_BRANCH=${{ github.ref_name }} >> variables.txt
+            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> variables.txt
+
+        - name: Upload variables
+          uses: actions/upload-artifact@v2
+          with:
+            name: variables
+            path: variables.txt
   
     docker:
       name: Docker
@@ -41,17 +48,23 @@ jobs:
             ref: ${{ github.ref_name }}
             fetch-depth: 0
 
+        - name: Download variables
+          uses: actions/download-artifact@v2
+          with:
+            name: variables
+
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            echo $DLRS_NAME
-            echo $DLRS_BRANCH
-            echo $DLRS_VERSION
+            echo $(cat variables) >> "$GITHUB_ENV"
+            echo "DLRS_NAME=${{ env.DLRS_NAME }}"
+            echo "DLRS_BRANCH=${{ env.DLRS_BRANCH }}"
+            echo "DLRS_VERSION=${{ env.DLRS_VERSION }}"
 
         - name: Docker build
           run: |
-            echo "Building docker image" 
-            docker build . --tag $DLRS_NAME:$DLRS_VERSION
+            echo "Building docker image"
+            docker build -t $DLRS_NAME:$DLRS_VERSION .  
 
         - name: Docker login
           run: |
