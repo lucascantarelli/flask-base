@@ -25,16 +25,15 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables in variables file"
-            touch variables.txt
-            echo -e DLRS_NAME=${{ github.repository }} >> variables.txt
-            echo -e DLRS_BRANCH=${{ github.ref_name }} >> variables.txt
-            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> variables.txt
+            EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+            echo -e DLRS_NAME=${{ github.repository }} >> "$GITHUB_ENV"
+            echo -e DLRS_BRANCH=${{ github.ref_name }} >> "$GITHUB_ENV"
+            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> "$GITHUB_ENV"
+            echo "$EOF" >> "$GITHUB_ENV
 
         - name: Upload variables
-          uses: actions/upload-artifact@v2
-          with:
-            name: variables
-            path: variables.txt
+          run: |
+            echo ${{env.DLRS_NAME}}
   
     docker:
       name: Docker
@@ -63,7 +62,7 @@ jobs:
 
         - name: Docker build
           run: |
-            echo "Building docker image $DLRS_NAME:$DLRS_VERSION"
+            echo "Building docker image" 
             docker build . --tag $DLRS_NAME:$DLRS_VERSION
 
         - name: Docker login
