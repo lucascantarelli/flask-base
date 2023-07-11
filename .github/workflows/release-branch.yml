@@ -56,12 +56,15 @@ jobs:
         - name: Setting variables
           run: |
             echo "Setting variables from variables file"
-            echo $(cat variables) >> $GITHUB_ENV
+            source variables.txt
+            echo $DLRS_NAME
+            echo $DLRS_BRANCH
+            echo $DLRS_VERSION
 
         - name: Docker build
           run: |
             echo "Building docker image"
-            docker build -t $DLRS_NAME:$DLRS_VERSION .  
+            docker build . --tag $DLRS_NAME:$DLRS_VERSION
 
         - name: Docker login
           run: |
