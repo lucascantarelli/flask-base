@@ -21,13 +21,11 @@ jobs:
             fetch-depth: 0
 
         - name: Creating variables
-          run: |
-            echo "Creating variables file"
-            touch variables && chmod 777 variables
+          run: touch variables
 
         - name:
           run: |
-            git tag --sort creatordate -l "v*-RELEASE*" --merged
+            echo $(git tag --sort creatordate -l "v*-RELEASE*" --merged)
 
         - name: Setting variables
           run: |
@@ -43,7 +41,7 @@ jobs:
             name: variables
             path: .
   
-            
+
     docker:
       name: Docker
       runs-on: self-hosted
