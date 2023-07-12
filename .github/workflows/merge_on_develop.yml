@@ -1,4 +1,4 @@
-name: Release Branch
+name: Merge on Develop
 
 on:
   push:
@@ -11,31 +11,8 @@ on:
 
 jobs:
     variables:
-      #uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
-      name: Variables
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            repository: ${{ github.repository }}
-            ref: ${{ github.ref_name }}
-            fetch-depth: 0
-
-        - name: Setting variables
-          run: |
-            echo "Setting variables in variables file"
-            touch variables.txt
-            echo -e DLRS_NAME=dlrs-$(basename `git rev-parse --show-toplevel`) >> variables.txt 
-            echo -e DLRS_BRANCH=${{ github.ref_name }} >> variables.txt
-            echo -e DLRS_VERSION=$(git tag --sort creatordate -l "v*-RELEASE*" --merged | tail -n 1) >> variables.txt
-
-        - name: Upload variables
-          uses: actions/upload-artifact@v2
-          with:
-            name: variables.txt
-            path: variables.txt
-  
+      uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
+      
     docker:
       name: Docker
       runs-on: ubuntu-latest
