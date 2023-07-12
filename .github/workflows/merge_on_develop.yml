@@ -11,5 +11,6 @@ on:
 
 jobs:
     variables:
+      name: Variables
       uses: dolorestec/devops/.github/workflows/release-branch.yml@v1 
     
