@@ -21,5 +21,4 @@ jobs:
             ref: ${{ github.ref_name }}
             fetch-depth: 0
 
-        - name: Create Release Branch
-          uses: dolorestec/devops/.github/workflows/create-release-branch.yml@v1
+        - uses: dolorestec/devops/.github/workflows/create-release-branch.yml@v1
