@@ -21,5 +21,4 @@ jobs:
             fetch-depth: 0
 
         - name: Validate
-          run: |
-            echo "### Hello world! :rocket:" >> "$GITHUB_STEP_SUMMARY"
+          uses: dolorestec/devops/.github/workflows/validate@v1
