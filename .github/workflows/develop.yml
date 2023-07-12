@@ -11,3 +11,8 @@ jobs:
     check:
       name: Check 
       uses: dolorestec/devops/.github/workflows/validate.yml@v1
+
+    build:
+      name: Build
+      uses: dolorestec/devops/.github/workflows/validate.yml@v1
+      needs: check
