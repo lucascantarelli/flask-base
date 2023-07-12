@@ -1,0 +1,25 @@
+name: Push on Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+  workflow_dispatch:
+
+jobs:
+    create-release-branch:
+      name: Create Release Branch
+      runs-on: ubuntu-latest
+      timeout-minutes: 10
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
+        - name: Create Release Branch
+          uses: dolorestec/devops/.github/workflows/create-release-branch.yml@v1
