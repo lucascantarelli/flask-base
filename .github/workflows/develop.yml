@@ -21,4 +21,4 @@ jobs:
             fetch-depth: 0
 
         - name: Validate
-          uses: dolorestec/devops/.github/workflows/validate@v1
+          uses: dolorestec/devops/.github/workflows/validate.yml@v1
