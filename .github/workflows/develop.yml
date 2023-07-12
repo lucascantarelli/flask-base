@@ -13,5 +13,12 @@ jobs:
       runs-on: ubuntu-latest
       timeout-minutes: 10
       steps:
+        - name: Checkout code
+          uses: Actions/checkout@v3
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
         - name: Validate
           uses: dolorestec/devops/.github/workflows/validate.yml@v1
