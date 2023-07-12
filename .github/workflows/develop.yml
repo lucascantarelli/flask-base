@@ -15,8 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Variables
+    
+
+      - name: Create Variables file
         #uses: dolorestec/devops/.github/workflows/validate.yml@v1
         run: |
-          cat pyproject.toml | grep name
-          cat pyproject.toml | grep version
+          echo "Criando arquivo de variaveis" >> "$GITHUB_OUTPUT"
+
+
