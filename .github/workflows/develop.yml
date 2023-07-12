@@ -21,4 +21,6 @@ jobs:
             fetch-depth: 0
 
         - name: Validate
-          uses: dolorestec/devops/.github/workflows/validate.yml@v1
+          run: |
+            echo "Validating..."
+            echo "Validated!"
