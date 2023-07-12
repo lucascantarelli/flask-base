@@ -13,5 +13,13 @@ jobs:
       runs-on: ubuntu-latest
       timeout-minutes: 10
       steps:
-        - name: Create Release Branch
-          uses: dolorestec/devops/.github/workflows/create-release-branch.yml@v1 
+        - name: Checkout code
+          uses: Actions/checkout@v3
+          with:
+            repository: ${{ github.repository }}
+            ref: ${{ github.ref_name }}
+            fetch-depth: 0
+
+        - name: Validate
+          run: |
+            echo "### Hello world! :rocket:" >> "$GITHUB_STEP_SUMMARY"
