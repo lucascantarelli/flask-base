@@ -10,9 +10,13 @@ on:
 jobs:
     check:
       name: Check 
-      uses: dolorestec/devops/.github/workflows/validate.yml@v1
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    build:
-      name: Build
-      uses: dolorestec/devops/.github/workflows/validate.yml@v1
-      needs: check
+      - name: Variables
+        #uses: dolorestec/devops/.github/workflows/validate.yml@v1
+        run: |
+          cat pyproject.toml | grep name
+          cat pyproject.toml | grep version
